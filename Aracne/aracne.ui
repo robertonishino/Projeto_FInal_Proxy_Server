@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1275</width>
+    <width>1291</width>
     <height>720</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="spiderButton">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>670</y>
+      <x>1090</x>
+      <y>10</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="dumpButton">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>670</y>
+      <x>1180</x>
+      <y>10</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -71,9 +71,9 @@
    <widget class="QListWidget" name="repliesWidget">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>650</x>
       <y>40</y>
-      <width>601</width>
+      <width>621</width>
       <height>620</height>
      </rect>
     </property>
@@ -87,7 +87,7 @@
    <widget class="QPushButton" name="requestButton">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>10</y>
       <width>93</width>
       <height>28</height>
@@ -100,7 +100,7 @@
    <widget class="QPushButton" name="replyButton">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>650</x>
       <y>10</y>
       <width>93</width>
       <height>28</height>
@@ -113,7 +113,7 @@
    <widget class="QPushButton" name="startServerButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>20</x>
       <y>670</y>
       <width>93</width>
       <height>28</height>
@@ -126,7 +126,7 @@
    <widget class="QPushButton" name="stopServerButton">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>110</x>
       <y>670</y>
       <width>93</width>
       <height>28</height>
@@ -139,7 +139,7 @@
    <widget class="QLabel" name="serverLabel">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>600</x>
       <y>670</y>
       <width>101</width>
       <height>16</height>
@@ -160,8 +160,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1275</width>
-     <height>26</height>
+     <width>1291</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
