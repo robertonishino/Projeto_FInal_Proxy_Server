@@ -9,9 +9,3 @@ void Button::handleClick()
 {
     this->_button->t
 }
-
-//Button::~Button()
-//{
-
-//}
-
