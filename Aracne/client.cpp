@@ -1,5 +1,7 @@
 #include "client.h"
 
+///@brief Constructor Client
+///@details Instanciado com o status como busy
 Client::Client(QObject *parent, bool busy, int id) :
     QObject(parent)
 {
@@ -7,9 +9,10 @@ Client::Client(QObject *parent, bool busy, int id) :
     this->myId = id;
 }
 
+///@brief Trata a conexão no Socket
+///@param Descriptor File Descriptor
 void Client::setSocket(qintptr Descriptor)
 {
-    // cria socket novo
     socket = new QTcpSocket(this);
 
     qDebug() << "Socket criado";
@@ -49,7 +52,11 @@ void Client::readyRead()
 
     emit new_request(request, this->myId);
 }
-// envia request para client
+
+///@brief Sinal de enviar Request
+///@param request String da requisição
+///@param clientId ID do Client
+///@details Cria o socket para fazer a conexão do Client para enviar a requisição e aguarda pela resposta
 void Client::send_request(QByteArray request, int clientId){
     if(this->myId == clientId){
         Socket *socket = new Socket(request, clientId);
@@ -60,7 +67,10 @@ void Client::send_request(QByteArray request, int clientId){
     }
 }
 
-// envia reply para client
+///@brief Sinal de enviar Reply
+///@param reply String da resposta
+///@param clientId ID do Client
+///@details Envia a resposta de volta e fecha conexão
 void Client::send_reply(QByteArray reply, int clientId){
     if(clientId == this->myId){
         socket->write(reply);

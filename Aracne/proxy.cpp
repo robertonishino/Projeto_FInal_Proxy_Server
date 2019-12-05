@@ -1,5 +1,8 @@
 #include "proxy.h"
 
+
+///@brief Constructor Proxy
+///@param port Porta para o Proxy escutar
 Proxy::Proxy(QObject *parent, Aracne *aracne, unsigned short port) :
     QTcpServer (parent)
 {
@@ -21,7 +24,8 @@ void Proxy::turn_on(){
     this->serverOn = true;
 }
 
-
+///@brief Seta o modo do Proxy para Standard
+///@details Futuramente haverá outros modos como o Spider por exemplo
 void Proxy::set_mode(QString mode){
     if(mode != "standard"){
         qDebug() << "Incorrect mode: " << mode;
@@ -35,12 +39,16 @@ void Proxy::turn_off(){
     this->serverOn = false;
 }
 
+///@brief Trata conexão vindo do Socket
+///@param socketDescriptor File Descriptor
 void Proxy::incomingConnection(qintptr socketDescriptor){
     if(!this->serverOn) return;
     else if(this->mode == "standard") this->standardMode(socketDescriptor);
     else return;
 }
 
+///@brief Instancia novo Client para lidar com a conexão
+///@details Trata a conexão, podendo ser envio de requisição, envio de resposta e chegada de nova requisição
 void Proxy::standardMode(qintptr socketDescriptor){
     Client *client = new Client(this, busy, this->clientId++);
 

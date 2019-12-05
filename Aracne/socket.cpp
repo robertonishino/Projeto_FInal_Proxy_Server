@@ -1,5 +1,7 @@
 #include "socket.h"
 
+
+///@brief Constructor do Socket
 Socket::Socket(QByteArray request, int clientId) {
     this->myId = clientId;
     this->request = request;
@@ -7,6 +9,8 @@ Socket::Socket(QByteArray request, int clientId) {
     QThreadPool::globalInstance()->setMaxThreadCount(5);
 }
 
+///@brief Faz a conexão com o host
+///@details Usa o Parser para os GET na requisição e prepara a conexão com o host
 void Socket::start(){
     qDebug() << Q_FUNC_INFO << "Starting thread for client " << this->myId;
     qDebug() << Q_FUNC_INFO << "Request: " << this->request;
@@ -29,6 +33,7 @@ void Socket::start(){
     this->socket->connectToHost(hostname, 80);
 }
 
+///@brief Pega a reply do host e fecha a conexão
 void Socket::connected(){
     qDebug() << "Conectado";
 
@@ -45,6 +50,7 @@ void Socket::connected(){
     this->socket->deleteLater();
 }
 
+///@brief Envia a resposta para ser tratada
 void Socket::disconnected(){
     qDebug() << "Desconectado";
     emit new_reply(this->reply, this->myId);

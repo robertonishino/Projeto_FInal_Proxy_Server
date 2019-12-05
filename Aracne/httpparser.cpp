@@ -4,6 +4,8 @@ HttpParser::HttpParser(){
 
 }
 
+///@brief Trata os headers da requisição
+///@param request String da requisição
 void HttpParser::parseRequest(QByteArray request){
     char *msg = request.data();
     char *head = msg;
@@ -14,21 +16,21 @@ void HttpParser::parseRequest(QByteArray request){
         return;
     }
 
-    // Find request type
+    /// Find request type
     while( *head++ != ' ');
     this->_http_request[ "Type" ] = std::string( ( char * ) msg ).substr( 0 , ( head - 1) - tail );
 
-    // Find path
+    /// Find path
     tail = head;
     while( *head++ != ' ');
     this->_http_request[ "Path" ] = std::string( ( char * ) msg ).substr( tail - ( char *)msg , ( head - 1) - tail );
 
-    // Find HTTP version
+    /// Find HTTP version
     tail = head;
     while( *head++ != '\r');
     this->_http_request[ "Version" ] = std::string( ( char * ) msg ).substr( tail - ( char *)msg , ( head - 1) - tail );
 
-    // Map all headers from a key to a value
+    /// Map all headers from a key to a value
     while( true )
     {
         tail = head + 1;
@@ -43,21 +45,26 @@ void HttpParser::parseRequest(QByteArray request){
     }
 }
 
+///@brief Get no Host da requisição
 QString HttpParser::getHostname(){
     return QString(this->_http_request[ "Host" ].c_str());
 }
 
+///@brief Get no tipo do conteúdo da requisição
 QString HttpParser::getContentType(){
     return QString(this->_http_request[ "Content-Type" ].c_str());
 }
 
+///@brief Get Path
 QString HttpParser::getPath(){
     return QString(this->_http_request[ "Path" ].c_str());
 }
 
+///@brief Get tamanho do conteúdo
 QString HttpParser::getContentLength(){
     return QString(this->_http_request[ "Content-Length" ].c_str());
 }
+
 
 void HttpParser::setRequest(QByteArray request){
     this->_request = request;
