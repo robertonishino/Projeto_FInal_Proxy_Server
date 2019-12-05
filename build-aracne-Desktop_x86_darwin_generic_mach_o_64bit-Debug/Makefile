@@ -236,6 +236,7 @@ DIST          = ../../../../Qt/5.12.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf \
+		../Aracne/.qmake.stash \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf \
@@ -291,7 +292,7 @@ include /Users/robertoko/Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-aracne.app/Contents/MacOS/aracne: ui_aracne.h $(OBJECTS)  
+aracne.app/Contents/MacOS/aracne: ui_Spider.h ui_aracne.h $(OBJECTS)  
 	@test -d aracne.app/Contents/MacOS/ || mkdir -p aracne.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -460,6 +461,7 @@ Makefile: ../Aracne/aracne.pro ../../../../Qt/5.12.6/clang_64/mkspecs/macx-clang
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../../Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf \
@@ -659,6 +661,7 @@ Makefile: ../Aracne/aracne.pro ../../../../Qt/5.12.6/clang_64/mkspecs/macx-clang
 ../../../../Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../../Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf:
 ../../../../Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf:
@@ -724,7 +727,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../../../../Qt/5.12.6/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Aracne/aracne.h ../Aracne/client.h ../Aracne/httpparser.h ../Aracne/proxy.h ../Aracne/socket.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Aracne/client.cpp ../Aracne/httpparser.cpp ../Aracne/main.cpp ../Aracne/aracne.cpp ../Aracne/proxy.cpp ../Aracne/socket.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Aracne/aracne.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Aracne/Spider.ui ../Aracne/aracne.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -734,6 +737,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r aracne.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1492,9 +1496,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_aracne.h
+compiler_uic_make_all: ui_Spider.h ui_aracne.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_aracne.h
+	-$(DEL_FILE) ui_Spider.h ui_aracne.h
+ui_Spider.h: ../Aracne/Spider.ui \
+		../../../../Qt/5.12.6/clang_64/bin/uic
+	/Users/robertoko/Qt/5.12.6/clang_64/bin/uic ../Aracne/Spider.ui -o ui_Spider.h
+
 ui_aracne.h: ../Aracne/aracne.ui \
 		../../../../Qt/5.12.6/clang_64/bin/uic
 	/Users/robertoko/Qt/5.12.6/clang_64/bin/uic ../Aracne/aracne.ui -o ui_aracne.h

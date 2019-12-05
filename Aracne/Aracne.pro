@@ -35,7 +35,8 @@ HEADERS += \
         socket.h
 
 FORMS += \
-        aracne.ui 
+        aracne.ui  \
+        spider.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
